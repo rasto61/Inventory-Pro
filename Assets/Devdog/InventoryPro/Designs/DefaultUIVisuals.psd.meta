@@ -9,56 +9,133 @@ labels:
 - Pro
 - UI
 - UX
-timeCreated: 1451004377
-licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: IconDefault
-    21300002: IconRare
-    21300004: IconGold
-    21300006: IconSort
-    21300008: WindowTopLeft
-    21300010: WindowTop
-    21300012: WindowTopRight
-    21300014: SeparatorLeft
-    21300016: SeparatorRight
-    21300018: WindowLeft
-    21300020: WindowCenter
-    21300022: WindowRight
-    21300024: SeparatorCenter
-    21300026: WindowBottomLeft
-    21300028: WindowBottom
-    21300030: WindowBottomRight
-    21300032: DefaultWindow
-    21300034: InputField
-    21300036: InputFocused
-    21300038: SeperatorLeft
-    21300040: SeperatorRight
-    21300042: SeperatorCenter
-    21300044: IconSearch
-    21300046: InfoBox
-    21300048: InfoBoxSeperator
-    21300050: SkillbarBg
-    21300052: IconCooldown
-    21300054: ScrollbarBG
-    21300056: ScrollingBox
-    21300058: IconUndo
-    21300060: IconSell
-    21300062: ScrollingBox_Light
-    21300064: IconHand
-    21300066: BagIcon
-    21300068: CharacterIcon
-    21300070: IconWeight
-    21300072: Border_Outline
-    21300074: IconHeart
-  serializedVersion: 2
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: IconDefault
+  - first:
+      213: 21300002
+    second: IconRare
+  - first:
+      213: 21300004
+    second: IconGold
+  - first:
+      213: 21300006
+    second: IconSort
+  - first:
+      213: 21300008
+    second: WindowTopLeft
+  - first:
+      213: 21300010
+    second: WindowTop
+  - first:
+      213: 21300012
+    second: WindowTopRight
+  - first:
+      213: 21300014
+    second: SeparatorLeft
+  - first:
+      213: 21300016
+    second: SeparatorRight
+  - first:
+      213: 21300018
+    second: WindowLeft
+  - first:
+      213: 21300020
+    second: WindowCenter
+  - first:
+      213: 21300022
+    second: WindowRight
+  - first:
+      213: 21300024
+    second: SeparatorCenter
+  - first:
+      213: 21300026
+    second: WindowBottomLeft
+  - first:
+      213: 21300028
+    second: WindowBottom
+  - first:
+      213: 21300030
+    second: WindowBottomRight
+  - first:
+      213: 21300032
+    second: DefaultWindow
+  - first:
+      213: 21300034
+    second: InputField
+  - first:
+      213: 21300036
+    second: InputFocused
+  - first:
+      213: 21300038
+    second: SeperatorLeft
+  - first:
+      213: 21300040
+    second: SeperatorRight
+  - first:
+      213: 21300042
+    second: SeperatorCenter
+  - first:
+      213: 21300044
+    second: IconSearch
+  - first:
+      213: 21300046
+    second: InfoBox
+  - first:
+      213: 21300048
+    second: InfoBoxSeperator
+  - first:
+      213: 21300050
+    second: SkillbarBg
+  - first:
+      213: 21300052
+    second: IconCooldown
+  - first:
+      213: 21300054
+    second: ScrollbarBG
+  - first:
+      213: 21300056
+    second: ScrollingBox
+  - first:
+      213: 21300058
+    second: IconUndo
+  - first:
+      213: 21300060
+    second: IconSell
+  - first:
+      213: 21300062
+    second: ScrollingBox_Light
+  - first:
+      213: 21300064
+    second: IconHand
+  - first:
+      213: 21300066
+    second: BagIcon
+  - first:
+      213: 21300068
+    second: CharacterIcon
+  - first:
+      213: 21300070
+    second: IconWeight
+  - first:
+      213: 21300072
+    second: Border_Outline
+  - first:
+      213: 21300074
+    second: IconHeart
+  externalObjects: {}
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -67,35 +144,60 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
+    serializedVersion: 2
     filterMode: 2
     aniso: 16
-    mipBias: -1
-    wrapMode: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -111,7 +213,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 6, y: 6, z: 6, w: 6}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconRare
       rect:
@@ -124,7 +234,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 7, y: 7, z: 7, w: 7}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconGold
       rect:
@@ -137,7 +255,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconSort
       rect:
@@ -150,7 +276,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: DefaultWindow
       rect:
@@ -163,7 +297,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 26, y: 28, z: 28, w: 22}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 04305410000000000800000000000000
+      internalID: 21300032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: InputField
       rect:
@@ -176,7 +318,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 25, y: 20, z: 25, w: 20}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 24305410000000000800000000000000
+      internalID: 21300034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: InputFocused
       rect:
@@ -189,7 +339,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 25, y: 20, z: 25, w: 20}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 44305410000000000800000000000000
+      internalID: 21300036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: SeperatorLeft
       rect:
@@ -202,7 +360,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 64305410000000000800000000000000
+      internalID: 21300038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: SeperatorRight
       rect:
@@ -215,7 +381,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 84305410000000000800000000000000
+      internalID: 21300040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: SeperatorCenter
       rect:
@@ -228,7 +402,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: a4305410000000000800000000000000
+      internalID: 21300042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconSearch
       rect:
@@ -241,7 +423,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c4305410000000000800000000000000
+      internalID: 21300044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: InfoBox
       rect:
@@ -254,7 +444,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 8, y: 8, z: 8, w: 8}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e4305410000000000800000000000000
+      internalID: 21300046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: SkillbarBg
       rect:
@@ -267,7 +465,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 25305410000000000800000000000000
+      internalID: 21300050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconCooldown
       rect:
@@ -280,7 +486,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 6, y: 6, z: 6, w: 6}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 45305410000000000800000000000000
+      internalID: 21300052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: InfoBoxSeperator
       rect:
@@ -293,7 +507,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 12, y: 0, z: 12, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 05305410000000000800000000000000
+      internalID: 21300048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ScrollbarBG
       rect:
@@ -306,7 +528,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 12, z: 0, w: 12}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 65305410000000000800000000000000
+      internalID: 21300054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ScrollingBox
       rect:
@@ -319,7 +549,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 15, z: 0, w: 15}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 85305410000000000800000000000000
+      internalID: 21300056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconUndo
       rect:
@@ -332,7 +570,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: a5305410000000000800000000000000
+      internalID: 21300058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconSell
       rect:
@@ -345,7 +591,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c5305410000000000800000000000000
+      internalID: 21300060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ScrollingBox_Light
       rect:
@@ -358,7 +612,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 15, z: 0, w: 15}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e5305410000000000800000000000000
+      internalID: 21300062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconHand
       rect:
@@ -371,7 +633,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 06305410000000000800000000000000
+      internalID: 21300064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BagIcon
       rect:
@@ -384,7 +654,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 26305410000000000800000000000000
+      internalID: 21300066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: CharacterIcon
       rect:
@@ -397,7 +675,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 46305410000000000800000000000000
+      internalID: 21300068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconWeight
       rect:
@@ -410,7 +696,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 66305410000000000800000000000000
+      internalID: 21300070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Border_Outline
       rect:
@@ -423,7 +717,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 6, y: 6, z: 6, w: 6}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 86305410000000000800000000000000
+      internalID: 21300072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: IconHeart
       rect:
@@ -436,9 +738,28 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: a6305410000000000800000000000000
+      internalID: 21300074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 1
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
