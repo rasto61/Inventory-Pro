@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -16,7 +17,7 @@ MonoBehaviour:
   customName: 
   customDescription: 
   requiredItems:
-  - item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 2}
+  - item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 3}
     amount: 1
   usageRequirement: []
   playerLearnedBlueprint: 1
@@ -25,9 +26,9 @@ MonoBehaviour:
     _amount: 0
   successChanceFactor: 1
   resultItems:
-  - item: {fileID: 11492682, guid: c59b65aff44e66943a6a5e41ce319d19, type: 2}
+  - item: {fileID: 11492682, guid: c59b65aff44e66943a6a5e41ce319d19, type: 3}
     amount: 1
-  - item: {fileID: 11429768, guid: d7fab5330f7396d469a6b502e537a6f7, type: 2}
+  - item: {fileID: 11429768, guid: d7fab5330f7396d469a6b502e537a6f7, type: 3}
     amount: 1
   craftingTimeDuration: 1
   craftingTimeSpeedupFactor: 1.1
@@ -50,13 +51,13 @@ MonoBehaviour:
     - index: 1
       columns:
       - index: 0
-        item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 2}
+        item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 3}
         amount: 1
       - index: 1
-        item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 2}
+        item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 3}
         amount: 1
       - index: 2
-        item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 2}
+        item: {fileID: 11439538, guid: b855851bf49ee9142aa3aa1f57a70a2d, type: 3}
         amount: 1
     - index: 2
       columns:

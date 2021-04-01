@@ -318,7 +318,7 @@ namespace Devdog.InventoryPro.Editors {
 		}
 
 		public static string GetAssetName(InventoryItemBase item) {
-			return "Item_" + (string.IsNullOrEmpty(item.name) ? string.Empty : item.name.ToLower().Replace(" ", "_")) + "_#" + item.ID + "_" + ItemManager.database.name + "_PFB.prefab";
+			return "Item_" + $"{(string.IsNullOrEmpty(item.AssetGroup) ? string.Empty:item.AssetGroup)}_" + (string.IsNullOrEmpty(item.name) ? string.Empty : item.name.ToLower().Replace(" ", "_")) + "_#" + item.ID + "_" + ItemManager.database.name + "_PFB.prefab";
 		}
 
 		private InventoryItemBase UpdatePrefab(InventoryItemBase instance, InventoryItemBase oldPrefab) {
@@ -414,21 +414,13 @@ namespace Devdog.InventoryPro.Editors {
 			}
 
 			uint id = 0;
-			try {
-				// AssetDatabase.StartAssetEditing();
-				foreach (var item in crudList) {
-					UpdatePrefab(item, id);
-					UpdateAssetName(item);
-					id++;
-				}
-			} finally {
-				// AssetDatabase.StopAssetEditing();
+			foreach (var item in crudList) {
+				UpdatePrefab(item, id);
+
+				id++;
 			}
 
-			// foreach (var item in crudList) {
-			// 	UpdateAssetName(item);
-			// }
-
+			AssetDatabase.SaveAssets();
 			EditorUtility.SetDirty(ItemManager.database);
 		}
 
@@ -439,11 +431,7 @@ namespace Devdog.InventoryPro.Editors {
 				editScope.prefabRoot.GetComponent<InventoryItemBase>().ID = id;
 			}
 
-			// var newName = GetAssetName(item);
-			// if (assetPath.EndsWith(newName) == false) {
-			// 	Debug.Log("Rename " + assetPath + " to " + newName);
-			// 	AssetDatabase.RenameAsset(assetPath, newName);
-			// }
+			UpdateAssetName(item);
 		}
 
 		private void UpdateAssetName(InventoryItemBase item) {

@@ -52,20 +52,14 @@ namespace Devdog.InventoryPro {
         }
 
         [SerializeField]
-        private string _displayName = "";
+        private string _assetGroup = "";
 
-        /// <summary>
-        /// Name of the object (does not have to be unique)
-        /// <example>
-        /// Access as item.name
-        /// </example>
-        /// </summary>
-        public virtual string DisplayName {
+        public virtual string AssetGroup {
             get {
-                return _displayName;
+                return _assetGroup;
             }
             set {
-                _displayName = value;
+                _assetGroup = value;
             }
         }
 
@@ -496,10 +490,6 @@ namespace Devdog.InventoryPro {
 
         public virtual void NotifyItemPickedUp() {
 
-        }
-
-        void Reset() {
-            Debug.Log("Reset {name}");
         }
 
         /// <summary>

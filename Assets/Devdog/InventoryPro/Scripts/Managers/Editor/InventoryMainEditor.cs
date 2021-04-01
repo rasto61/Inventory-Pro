@@ -1,11 +1,11 @@
 ﻿using System;
-using UnityEngine;
 using System.Collections;
-using UnityEditor;
 using System.Collections.Generic;
 using System.Reflection;
 using Devdog.General.Editors;
 using Devdog.General.Editors.GameRules;
+using UnityEditor;
+using UnityEngine;
 using EditorUtility = UnityEditor.EditorUtility;
 using EditorStyles = Devdog.General.Editors.EditorStyles;
 
@@ -13,13 +13,10 @@ using EditorStyles = Devdog.General.Editors.EditorStyles;
 using Devdog.InventoryPro.Integration.plyGame.Editors;
 #endif
 
-
-namespace Devdog.InventoryPro.Editors
-{
+namespace Devdog.InventoryPro.Editors {
     using Devdog.General.ThirdParty.UniLinq;
 
-    public class InventoryMainEditor : BetterEditorWindow
-    {
+    public class InventoryMainEditor : BetterEditorWindow {
         private static int toolbarIndex { get; set; }
 
         public static EmptyEditor itemEditor { get; set; }
@@ -32,27 +29,22 @@ namespace Devdog.InventoryPro.Editors
 
         private static IGameRule[] _gameRules = new IGameRule[0];
         private static InventoryMainEditor _window;
-		//        private string[] _databasesInProject;
-		private UnityEngine.SceneManagement.Scene previewScene;
+        //        private string[] _databasesInProject;
+        private UnityEngine.SceneManagement.Scene previewScene;
 
-		public static InventoryMainEditor window
-        {
-            get
-            {
-                if(_window == null)
+        public static InventoryMainEditor window {
+            get {
+                if (_window == null)
                     _window = GetWindow<InventoryMainEditor>(false, "Inventory Pro Manager", false);
 
                 return _window;
             }
         }
 
-        protected string[] editorNames
-        {
-            get
-            {
+        protected string[] editorNames {
+            get {
                 string[] items = new string[editors.Count];
-                for (int i = 0; i < editors.Count; i++)
-                {
+                for (int i = 0; i < editors.Count; i++) {
                     items[i] = editors[i].ToString();
                 }
 
@@ -61,13 +53,11 @@ namespace Devdog.InventoryPro.Editors
         }
 
         [MenuItem(InventoryPro.ToolsMenuPath + "Main editor", false, -99)] // Always at the top
-        public static void ShowWindow()
-        {
+        public static void ShowWindow() {
             _window = GetWindow<InventoryMainEditor>(false, "Inventory Pro Manager", true);
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() {
             minSize = new Vector2(600.0f, 400.0f);
             toolbarIndex = 0;
 
@@ -83,41 +73,32 @@ namespace Devdog.InventoryPro.Editors
             CreateEditors();
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() {
             GameRulesWindow.OnIssuesUpdated -= UpdateMiniToolbar;
 
 #if UNITY_2018_3_OR_NEWER
-			ItemManager.ResetItemDatabaseLookup();
-			var rootGameObjects = (GameObject[])previewScene.GetRootGameObjects().Clone();
-			foreach (var go in rootGameObjects)
-			{
-			    UnityEngine.Object.DestroyImmediate(go);
-			}
+            ItemManager.ResetItemDatabaseLookup();
+            var rootGameObjects = (GameObject[])previewScene.GetRootGameObjects().Clone();
+            foreach (var go in rootGameObjects) {
+                UnityEngine.Object.DestroyImmediate(go);
+            }
 #endif
-		}
+        }
 
-		internal static void UpdateMiniToolbar(List<IGameRule> issues)
-        {
+        internal static void UpdateMiniToolbar(List<IGameRule> issues) {
             window.Repaint();
         }
 
-        public static void SelectTab(Type type)
-        {
+        public static void SelectTab(Type type) {
             int i = 0;
-            foreach (var editor in editors)
-            {
+            foreach (var editor in editors) {
                 var ed = editor as EmptyEditor;
-                if (ed != null)
-                {
+                if (ed != null) {
                     bool isChildOf = ed.childEditors.Select(o => o.GetType()).Contains(type);
-                    if (isChildOf)
-                    {
+                    if (isChildOf) {
                         toolbarIndex = i;
-                        for (int j = 0; j < ed.childEditors.Count; j++)
-                        {
-                            if (ed.childEditors[j].GetType() == type)
-                            {
+                        for (int j = 0; j < ed.childEditors.Count; j++) {
+                            if (ed.childEditors[j].GetType() == type) {
                                 ed.toolbarIndex = j;
                             }
                         }
@@ -129,8 +110,7 @@ namespace Devdog.InventoryPro.Editors
                     }
                 }
 
-                if (editor.GetType() == type)
-                {
+                if (editor.GetType() == type) {
                     toolbarIndex = i;
                     editor.Focus();
                     window.Repaint();
@@ -143,21 +123,19 @@ namespace Devdog.InventoryPro.Editors
             Debug.LogWarning("Trying to select tab in main editor, but type isn't in editor.");
         }
 
-        public virtual void CreateEditors()
-        {
+        public virtual void CreateEditors() {
             editors.Clear();
             itemEditor = new EmptyEditor("Items editor", this);
             itemEditor.requiresDatabase = true;
 
 #if UNITY_2018_3_OR_NEWER
-			previewScene = UnityEditor.SceneManagement.EditorSceneManager.NewPreviewScene();
-			itemEditor.childEditors.Add(new ItemEditor("Item", "Items", this, previewScene));
+            previewScene = UnityEditor.SceneManagement.EditorSceneManager.NewPreviewScene();
+            itemEditor.childEditors.Add(new ItemEditor("Item", "Items", this, previewScene));
 #else
-			itemEditor.childEditors.Add(new ItemEditor("Item", "Items", this));
+            itemEditor.childEditors.Add(new ItemEditor("Item", "Items", this));
 #endif
 
-
-			itemEditor.childEditors.Add(new ItemCategoryEditor("Item category", "Item categories", this) { canReOrderItems = true });
+            itemEditor.childEditors.Add(new ItemCategoryEditor("Item category", "Item categories", this) { canReOrderItems = true });
             itemEditor.childEditors.Add(new ItemStatEditor("Item stat", "Item stats", this) { canReOrderItems = true });
             itemEditor.childEditors.Add(new ItemRarityEditor("Item Rarity", "Item rarities", this) { canReOrderItems = true });
             editors.Add(itemEditor);
@@ -186,15 +164,11 @@ namespace Devdog.InventoryPro.Editors
             editors.Add(settingsEditor);
         }
 
-        protected virtual void DrawToolbar()
-        {
-            if (ItemManager.instance != null && ItemManager.itemDatabaseLookup.hasSelectedDatabase)
-            {
-                if (AssetDatabase.GetAssetPath(ItemManager.database) != AssetDatabase.GetAssetPath(ItemManager.instance.sceneItemDatabase))
-                {
+        protected virtual void DrawToolbar() {
+            if (ItemManager.instance != null && ItemManager.itemDatabaseLookup.hasSelectedDatabase) {
+                if (AssetDatabase.GetAssetPath(ItemManager.database) != AssetDatabase.GetAssetPath(ItemManager.instance.sceneItemDatabase)) {
                     EditorGUILayout.HelpBox("This scene contains a different database than is currently selected.", MessageType.Warning);
-                    if (GUILayout.Button("Select scene's database"))
-                    {
+                    if (GUILayout.Button("Select scene's database")) {
                         ItemManager.itemDatabaseLookup.SetDatabase(ItemManager.instance.sceneItemDatabase);
                     }
                 }
@@ -202,15 +176,12 @@ namespace Devdog.InventoryPro.Editors
 
             EditorGUILayout.BeginHorizontal();
             GUI.color = Color.grey;
-            if (GUILayout.Button("< DB", EditorStyles.toolbarStyle, GUILayout.Width(60)))
-            {
+            if (GUILayout.Button("< DB", EditorStyles.toolbarStyle, GUILayout.Width(60))) {
                 var selected = ItemManager.itemDatabaseLookup.ManuallySelectDatabase();
-                if(selected == false)
-                {
+                if (selected == false) {
                     // Create a database
                     var db = ScriptableObjectUtility.CreateAssetChooseSaveFolder<ItemDatabase>("ItemDatabase.asset", true);
-                    if (db != null)
-                    {
+                    if (db != null) {
                         ItemManager.itemDatabaseLookup.SetDatabase(db);
                     }
                 }
@@ -223,29 +194,26 @@ namespace Devdog.InventoryPro.Editors
             toolbarIndex = GUILayout.Toolbar(toolbarIndex, editorNames, EditorStyles.toolbarStyle);
             if (before != toolbarIndex)
                 editors[toolbarIndex].Focus();
-            
+
             EditorGUILayout.EndHorizontal();
         }
 
-        internal static void DrawMiniToolbar()
-        {
+        internal static void DrawMiniToolbar() {
             GUILayout.BeginVertical("Toolbar", GUILayout.ExpandWidth(true));
-            
+
             var issueCount = _gameRules.Sum(o => o.ignore == false ? o.issues.Count : 0);
             if (issueCount > 0)
                 GUI.color = Color.red;
             else
                 GUI.color = Color.green;
-            
-            if (GUILayout.Button(issueCount + " issues found in scene.", "toolbarbutton", GUILayout.Width(300)))
-            {
+
+            if (GUILayout.Button(issueCount + " issues found in scene.", "toolbarbutton", GUILayout.Width(300))) {
                 GameRulesWindow.ShowWindow();
             }
 
             GUI.color = Color.white;
 
-            if (ItemManager.itemDatabaseLookup.hasSelectedDatabase)
-            {
+            if (ItemManager.itemDatabaseLookup.hasSelectedDatabase) {
                 var style = UnityEditor.EditorStyles.centeredGreyMiniLabel;
 
                 var r = new Rect(320, window.position.height - 18, window.position.width - 320, 20);
@@ -255,16 +223,12 @@ namespace Devdog.InventoryPro.Editors
             GUILayout.EndVertical();
         }
 
-
-        public override void OnGUI()
-        {
+        public override void OnGUI() {
             base.OnGUI();
             DrawToolbar();
 
-            if (InventoryScriptableObjectUtility.isPrefabsSaveFolderSet == false)
-            {
-                if (settingsEditor == null)
-                {
+            if (InventoryScriptableObjectUtility.isPrefabsSaveFolderSet == false) {
+                if (settingsEditor == null) {
                     CreateEditors();
                 }
 
@@ -272,8 +236,7 @@ namespace Devdog.InventoryPro.Editors
                 return;
             }
 
-            if (toolbarIndex < 0 || toolbarIndex >= editors.Count || editors.Count == 0)
-            {
+            if (toolbarIndex < 0 || toolbarIndex >= editors.Count || editors.Count == 0) {
                 toolbarIndex = 0;
                 CreateEditors();
             }
