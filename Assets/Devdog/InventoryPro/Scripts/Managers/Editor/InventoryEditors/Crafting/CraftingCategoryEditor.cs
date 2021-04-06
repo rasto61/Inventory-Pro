@@ -7,38 +7,30 @@ using UnityEditor;
 using UnityEngine;
 using EditorStyles = Devdog.General.Editors.EditorStyles;
 
-namespace Devdog.InventoryPro.Editors
-{
-    public class CraftingCategoryEditor : ScriptableObjectEditorCrud<CraftingCategory>
-    {
-        protected override List<CraftingCategory> crudList
-        {
+namespace Devdog.InventoryPro.Editors {
+    public class CraftingCategoryEditor : ScriptableObjectEditorCrud<CraftingCategory> {
+        protected override List<CraftingCategory> crudList {
             get { return new List<CraftingCategory>(ItemManager.database.craftingCategories); }
             set { ItemManager.database.craftingCategories = value.ToArray(); }
         }
 
         protected CraftingEmptyEditor parentEditor { get; set; }
 
-        public CraftingCategoryEditor(string singleName, string pluralName, EditorWindow window, CraftingEmptyEditor editor)
-            : base(singleName, pluralName, window)
-        {
+        public CraftingCategoryEditor(string singleName, string pluralName, EditorWindow window, CraftingEmptyEditor editor) : base(singleName, pluralName, window) {
             parentEditor = editor;
             canReOrderItems = true;
         }
 
-        protected override bool MatchesSearch(CraftingCategory item, string searchQuery)
-        {
+        protected override bool MatchesSearch(CraftingCategory item, string searchQuery) {
             string search = searchQuery.ToLower();
             return (item.ID.ToString().Contains(search) || item.name.ToLower().Contains(search) || item.description.ToLower().Contains(search));
         }
 
-        protected override void GiveItemNewID(CraftingCategory item)
-        {
+        protected override void GiveItemNewID(CraftingCategory item) {
             item.ID = crudList.Count > 0 ? crudList.Max(o => o.ID) + 1 : 0;
         }
 
-        public override void AddItem(CraftingCategory item, bool editOnceAdded = true)
-        {
+        public override void AddItem(CraftingCategory item, bool editOnceAdded = true) {
             base.AddItem(item, editOnceAdded);
 
             parentEditor.CreateEditors();
@@ -47,8 +39,7 @@ namespace Devdog.InventoryPro.Editors
             UnityEditor.EditorUtility.SetDirty(ItemManager.database);
         }
 
-        public override void RemoveItem(int index)
-        {
+        public override void RemoveItem(int index) {
             base.RemoveItem(index);
 
             parentEditor.CreateEditors();
@@ -57,8 +48,7 @@ namespace Devdog.InventoryPro.Editors
             UnityEditor.EditorUtility.SetDirty(ItemManager.database);
         }
 
-        protected override void DrawSidebarRow(CraftingCategory item, int i)
-        {
+        protected override void DrawSidebarRow(CraftingCategory item, int i) {
             //GUI.color = new Color(1.0f,1.0f,1.0f);
             BeginSidebarRow(item, i);
 
@@ -69,8 +59,7 @@ namespace Devdog.InventoryPro.Editors
             EndSidebarRow(item, i);
         }
 
-        protected override void DrawDetail(CraftingCategory category, int index)
-        {
+        protected override void DrawDetail(CraftingCategory category, int index) {
             EditorGUIUtility.labelWidth = EditorStyles.labelWidth;
             RenameScriptableObjectIfNeeded(category, category.name);
 
@@ -86,7 +75,6 @@ namespace Devdog.InventoryPro.Editors
             category.alsoScanBankForRequiredItems = EditorGUILayout.Toggle("Scan bank for craft items", category.alsoScanBankForRequiredItems);
             EditorGUILayout.Space();
 
-
             EditorGUILayout.LabelField("Audio clips", EditorStyles.titleStyle);
             EditorGUILayout.Space();
 
@@ -100,8 +88,7 @@ namespace Devdog.InventoryPro.Editors
             EditorGUILayout.LabelField("Layout crafting", EditorStyles.titleStyle);
             EditorGUILayout.Space();
 
-            ObjectPickerUtility.RenderObjectPickerForType("Icon", category.icon, typeof (Sprite), val =>
-            {
+            ObjectPickerUtility.RenderObjectPickerForType("Icon", category.icon, typeof(Sprite), val => {
                 category.icon = (Sprite)val;
             });
 
@@ -114,14 +101,12 @@ namespace Devdog.InventoryPro.Editors
             EditorGUILayout.LabelField("Category contains " + category.blueprints.Length + " blueprints.", EditorStyles.titleStyle);
             EditorGUILayout.EndVertical();
 
-
             ValidateItemFromCache(category);
 
             EditorGUIUtility.labelWidth = 0;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return singleName + " editor";
         }
     }

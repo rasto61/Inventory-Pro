@@ -52,18 +52,6 @@ namespace Devdog.InventoryPro {
         }
 
         [SerializeField]
-        private string _assetGroup = "";
-
-        public virtual string AssetGroup {
-            get {
-                return _assetGroup;
-            }
-            set {
-                _assetGroup = value;
-            }
-        }
-
-        [SerializeField]
         private string _description = "";
         /// <summary>
         /// Description of the object.

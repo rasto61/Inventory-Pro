@@ -1,14 +1,12 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Devdog.General;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Devdog.InventoryPro
-{
+namespace Devdog.InventoryPro {
     [System.Serializable]
-    public partial class CraftingCategory : ScriptableObject
-    {
+    public partial class CraftingCategory : ScriptableObject {
         [HideInInspector]
         public int ID;
 
@@ -32,8 +30,7 @@ namespace Devdog.InventoryPro
         public AudioClipInfo canceledAudioClip = new AudioClipInfo();
         public AudioClipInfo failedAudioClip = new AudioClipInfo();
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return name;
         }
     }

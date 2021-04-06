@@ -1,18 +1,16 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Devdog.General.Editors;
+using UnityEditor;
+using UnityEngine;
 using EditorStyles = Devdog.General.Editors.EditorStyles;
 using EditorUtility = UnityEditor.EditorUtility;
 
-namespace Devdog.InventoryPro.Editors
-{
-	[CustomEditor(typeof(InventoryItemBase), true)]
-	public class InventoryItemBaseEditor : InventoryEditorBase
-	{
+namespace Devdog.InventoryPro.Editors {
+	[CustomEditor(typeof(InventoryItemBase), true), CanEditMultipleObjects]
+	public class InventoryItemBaseEditor : InventoryEditorBase {
 		//private InventoryItemBase item;
 
 		protected SerializedProperty id;
@@ -37,34 +35,28 @@ namespace Devdog.InventoryPro.Editors
 		protected SerializedProperty maxStackSize;
 		protected SerializedProperty cooldownTime;
 
-
 		private UnityEditorInternal.ReorderableList _statsList;
 		private UnityEditorInternal.ReorderableList _usageRequirementList;
 
 		private bool _saved = true;
 
-		public bool saved
-		{
-			get
-			{
+		public bool saved {
+			get {
 				return _saved;
 			}
 
-			set
-			{
+			set {
 				_saved = value;
 			}
 		}
 
-
-		public override void OnEnable()
-		{
+		public override void OnEnable() {
 			base.OnEnable();
 
-            if (target == null)
-                return;
+			if (target == null)
+				return;
 
-            id = serializedObject.FindProperty("_id");
+			id = serializedObject.FindProperty("_id");
 			itemName = serializedObject.FindProperty("_name");
 			description = serializedObject.FindProperty("_description");
 			stats = serializedObject.FindProperty("_stats");
@@ -86,18 +78,15 @@ namespace Devdog.InventoryPro.Editors
 			maxStackSize = serializedObject.FindProperty("_maxStackSize");
 			cooldownTime = serializedObject.FindProperty("_cooldownTime");
 
-
 			var t = (InventoryItemBase)target;
 
 			_statsList = new UnityEditorInternal.ReorderableList(serializedObject, stats, true, true, true, true);
 			_statsList.drawHeaderCallback += rect => GUI.Label(rect, "Item stats");
 			_statsList.elementHeight = 40;
-			_statsList.drawElementCallback += (rect, index, active, focused) =>
-			{
+			_statsList.drawElementCallback += (rect, index, active, focused) => {
 				DrawItemStatLookup(rect, stats.GetArrayElementAtIndex(index), active, focused, true, true);
 			};
-			_statsList.onAddCallback += (list) =>
-			{
+			_statsList.onAddCallback += (list) => {
 				var l = new List<StatDecorator>(t.stats);
 				l.Add(new StatDecorator());
 				t.stats = l.ToArray();
@@ -112,13 +101,11 @@ namespace Devdog.InventoryPro.Editors
 			_usageRequirementList = new UnityEditorInternal.ReorderableList(serializedObject, usageRequirements, true, true, true, true);
 			_usageRequirementList.drawHeaderCallback += rect => GUI.Label(rect, "Usage requirement stats");
 			_usageRequirementList.elementHeight = 40;
-			_usageRequirementList.drawElementCallback += (rect, index, active, focused) =>
-			{
+			_usageRequirementList.drawElementCallback += (rect, index, active, focused) => {
 				var element = usageRequirements.GetArrayElementAtIndex(index);
 				DrawUsageRequirement(rect, element, active, focused, true);
 			};
-			_usageRequirementList.onAddCallback += (list) =>
-			{
+			_usageRequirementList.onAddCallback += (list) => {
 				var l = new List<StatRequirement>(t.usageRequirement);
 				l.Add(new StatRequirement());
 				t.usageRequirement = l.ToArray();
@@ -130,28 +117,23 @@ namespace Devdog.InventoryPro.Editors
 			};
 		}
 
-		protected virtual void DrawItemStatLookup(Rect rect, SerializedProperty property, bool isActive, bool isFocused, bool drawRestore, bool drawPercentage)
-		{
+		protected virtual void DrawItemStatLookup(Rect rect, SerializedProperty property, bool isActive, bool isFocused, bool drawRestore, bool drawPercentage) {
 			InventoryEditorUtility.DrawStatDecorator(rect, property, isActive, isFocused, drawRestore, drawPercentage);
 		}
 
-		protected virtual void DrawUsageRequirement(Rect rect, SerializedProperty property, bool isActive, bool isFocused, bool drawFilterType)
-		{
+		protected virtual void DrawUsageRequirement(Rect rect, SerializedProperty property, bool isActive, bool isFocused, bool drawFilterType) {
 			InventoryEditorUtility.DrawStatRequirement(rect, property, isActive, isFocused, drawFilterType);
 		}
 
-		private IEnumerator DestroyImmediateThis(InventoryItemBase obj)
-		{
+		private IEnumerator DestroyImmediateThis(InventoryItemBase obj) {
 			yield return null;
 			DestroyImmediate(obj.gameObject, false); // Destroy this object
 		}
 
-		protected override void OnCustomInspectorGUI(params CustomOverrideProperty[] extraOverride)
-		{
+		protected override void OnCustomInspectorGUI(params CustomOverrideProperty[] extraOverride) {
 			base.OnCustomInspectorGUI(extraOverride);
 
-			if (serializedObject == null || target == null)
-			{
+			if (serializedObject == null || target == null) {
 				return;
 			}
 
@@ -164,24 +146,20 @@ namespace Devdog.InventoryPro.Editors
 
 			GUI.color = Color.yellow;
 			var item = (InventoryItemBase)target;
-			if (item.gameObject.activeInHierarchy && item.rarity != null && item.rarity.dropObject != null)
-			{
-				if (GUILayout.Button("Convert to drop object"))
-				{
+			if (item.gameObject.activeInHierarchy && item.rarity != null && item.rarity.dropObject != null) {
+				if (GUILayout.Button("Convert to drop object")) {
 					var dropObj = item.rarity.dropObject;
 					var dropInstance = (GameObject)PrefabUtility.InstantiatePrefab(dropObj.gameObject);
 					var itemTrigger = dropInstance.AddComponent<ItemTrigger>();
 
 					var t = target;
-					if (t == null)
-					{
+					if (t == null) {
 						t = PrefabUtility.GetPrefabParent(t);
 					}
 
 					string path = AssetDatabase.GetAssetPath(t);
 					var asset = (GameObject)AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
-					if (asset != null)
-					{
+					if (asset != null) {
 						itemTrigger.itemPrefab = asset.GetComponent<InventoryItemBase>();
 
 						dropInstance.transform.SetParent(item.transform.parent);
@@ -202,8 +180,7 @@ namespace Devdog.InventoryPro.Editors
 			if (target == null)
 				return;
 
-			var excludeList = new List<string>()
-			{
+			var excludeList = new List<string>() {
 				"m_Script",
 				id.name,
 				itemName.name,
@@ -249,7 +226,6 @@ namespace Devdog.InventoryPro.Editors
 
 			Devdog.General.Editors.EditorUtility.EditableLabel(description, true, MarkToSave, "Note, that you can use rich text like <b>asd</b> to write bold text and <i>Potato</i> to write italic text.");
 
-
 			GUI.enabled = true;
 
 			EditorGUILayout.PropertyField(icon);
@@ -258,18 +234,15 @@ namespace Devdog.InventoryPro.Editors
 			EditorGUILayout.LabelField("Item layout");
 
 			EditorGUILayout.BeginVertical();
-			for (int i = 1; i < 7; i++)
-			{
+			for (int i = 1; i < 7; i++) {
 				EditorGUILayout.BeginHorizontal();
-				for (int j = 1; j < 7; j++)
-				{
+				for (int j = 1; j < 7; j++) {
 					if (layoutSizeCols.intValue < j || layoutSizeRows.intValue < i)
 						GUI.color = Color.gray;
 
 					var c = new GUIStyle("CN Box");
 					c.alignment = TextAnchor.MiddleCenter;
-					if (GUILayout.Button(j + " X " + i, c, GUILayout.Width(40), GUILayout.Height(40)))
-					{
+					if (GUILayout.Button(j + " X " + i, c, GUILayout.Width(40), GUILayout.Height(40))) {
 						layoutSizeCols.intValue = j;
 						layoutSizeRows.intValue = i;
 					}
@@ -281,28 +254,23 @@ namespace Devdog.InventoryPro.Editors
 			EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();
 
-			if (item.icon != null)
-			{
+			if (item.icon != null) {
 				var a = item.icon.bounds.size.x / item.icon.bounds.size.y;
 				var b = (float)item.layoutSizeCols / item.layoutSizeRows;
 
-				if (Mathf.Approximately(a, b) == false)
-				{
+				if (Mathf.Approximately(a, b) == false) {
 					EditorGUILayout.HelpBox("Layout size is different from icon aspect ratio.", MessageType.Warning);
 				}
 			}
 
-
 #if RELATIONS_INSPECTOR
-            if ( GUILayout.Button("Show relations", GUILayout.ExpandWidth( false ) ) )
-            {
-                EditorWindow
-                    .GetWindow<RelationsInspector.RelationsInspectorWindow>()
-                    .GetAPI1
-                    .ResetTargets( new[] { t }, typeof( RelationsInspector.InventoryProBackends.ItemBackend ) );
-            }
+			if (GUILayout.Button("Show relations", GUILayout.ExpandWidth(false))) {
+				EditorWindow
+					.GetWindow<RelationsInspector.RelationsInspectorWindow>()
+					.GetAPI1
+					.ResetTargets(new [] { t }, typeof(RelationsInspector.InventoryProBackends.ItemBackend));
+			}
 #endif
-
 
 			EditorGUILayout.EndVertical();
 
@@ -310,8 +278,7 @@ namespace Devdog.InventoryPro.Editors
 			GUILayout.Label("Item specific", EditorStyles.titleStyle);
 			EditorGUILayout.BeginVertical(EditorStyles.boxStyle);
 
-			foreach (var x in extraOverride)
-			{
+			foreach (var x in extraOverride) {
 				if (x.action != null)
 					x.action();
 
@@ -330,7 +297,6 @@ namespace Devdog.InventoryPro.Editors
 			_statsList.DoLayoutList();
 			EditorGUILayout.EndVertical();
 
-
 			GUILayout.Label("Usage requirement stats", EditorStyles.titleStyle);
 			GUILayout.Label("Add stats the user is required to have in order to use this item.");
 			GUILayout.Label("Example: Usage stat of 10 strength means:");
@@ -346,8 +312,7 @@ namespace Devdog.InventoryPro.Editors
 			EditorGUILayout.BeginVertical(EditorStyles.boxStyle);
 
 			GUILayout.Label("Details", EditorStyles.titleStyle);
-			if (rarity.objectReferenceValue != null)
-			{
+			if (rarity.objectReferenceValue != null) {
 				var color = ((ItemRarity)rarity.objectReferenceValue).color;
 				color.a = 1.0f; // Ignore alpha in the editor.
 				GUI.color = color;
@@ -360,46 +325,35 @@ namespace Devdog.InventoryPro.Editors
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.PropertyField(useCategoryCooldown);
-			if (useCategoryCooldown.boolValue)
-			{
-				if (category.objectReferenceValue != null)
-				{
+			if (useCategoryCooldown.boolValue) {
+				if (category.objectReferenceValue != null) {
 					var c = (ItemCategory)category.objectReferenceValue;
 					EditorGUILayout.LabelField(string.Format("({0} seconds)", c.cooldownTime));
 				}
 			}
 
 			EditorGUILayout.EndHorizontal();
-			if (useCategoryCooldown.boolValue == false)
-			{
+			if (useCategoryCooldown.boolValue == false) {
 				EditorGUILayout.PropertyField(cooldownTime);
 			}
-
 
 			EditorGUILayout.PropertyField(overrideDropObjectPrefab);
 
 			GameObject dropPrefab = null;
-			if (overrideDropObjectPrefab.objectReferenceValue != null)
-			{
+			if (overrideDropObjectPrefab.objectReferenceValue != null) {
 				EditorGUILayout.HelpBox("Overriding drop object to: " + overrideDropObjectPrefab.objectReferenceValue.name, MessageType.Info);
 				dropPrefab = (GameObject)overrideDropObjectPrefab.objectReferenceValue;
-			}
-			else if (item.rarity != null && item.rarity.dropObject != null)
-			{
+			} else if (item.rarity != null && item.rarity.dropObject != null) {
 				EditorGUILayout.HelpBox("Using rarity drop object: " + item.rarity.dropObject.name, MessageType.Info);
 				dropPrefab = item.rarity.dropObject;
-			}
-			else
-			{
+			} else {
 				EditorGUILayout.HelpBox("No drop object set.", MessageType.Info);
 				dropPrefab = item.gameObject;
 			}
 
-			if (dropPrefab.GetComponentsInChildren<Collider>(true).Any(o => o.isTrigger) == false && dropPrefab.GetComponentsInChildren<Collider2D>(true).Any(o => o.isTrigger) == false)
-			{
+			if (dropPrefab.GetComponentsInChildren<Collider>(true).Any(o => o.isTrigger) == false && dropPrefab.GetComponentsInChildren<Collider2D>(true).Any(o => o.isTrigger) == false) {
 				EditorGUILayout.HelpBox("Drop object has no triggers and therefore can never be picked up!", MessageType.Error);
 			}
-
 
 			GUILayout.Label("Buying & Selling", EditorStyles.titleStyle);
 			//            EditorGUILayout.BeginHorizontal();
@@ -422,12 +376,10 @@ namespace Devdog.InventoryPro.Editors
 
 			EditorGUILayout.EndVertical();
 
-
 			serializedObject.ApplyModifiedProperties();
 		}
 
-		private void MarkToSave()
-		{
+		private void MarkToSave() {
 			_saved = false;
 		}
 	}

@@ -1,14 +1,12 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Devdog.General.ThirdParty.UniLinq;
 using Devdog.General;
+using Devdog.General.ThirdParty.UniLinq;
+using UnityEngine;
 
-namespace Devdog.InventoryPro
-{
+namespace Devdog.InventoryPro {
     [System.Serializable]
-    public partial class CraftingBlueprint : ScriptableObject
-    {
+    public partial class CraftingBlueprint : ScriptableObject {
         /// <summary>
         /// The unique ID of this object. Note that this is NOT the index inside the category.
         /// </summary>
@@ -23,19 +21,14 @@ namespace Devdog.InventoryPro
         /// <summary>
         /// Name of the blueprint.
         /// </summary>
-        public new string name
-        {
-            get
-            {
-                if (useItemResultNameAndDescription)
-                {
-                    if (resultItems.Length == 0)
-                    {
+        public new string name {
+            get {
+                if (useItemResultNameAndDescription) {
+                    if (resultItems.Length == 0) {
                         return string.Empty;
                     }
                     var items = resultItems.Where(o => o.item != null);
-                    if (items.Any() == false)
-                    {
+                    if (items.Any() == false) {
                         return string.Empty;
                     }
 
@@ -49,14 +42,10 @@ namespace Devdog.InventoryPro
         /// <summary>
         /// Description of the blueprint.
         /// </summary>
-        public string description
-        {
-            get
-            {
-                if (useItemResultNameAndDescription)
-                {
-                    if (resultItems.Length == 0)
-                    {
+        public string description {
+            get {
+                if (useItemResultNameAndDescription) {
+                    if (resultItems.Length == 0) {
                         return string.Empty;
                     }
 
@@ -67,25 +56,23 @@ namespace Devdog.InventoryPro
             }
         }
 
-		public object EditorCrudBase { get; private set; }
+        public object EditorCrudBase { get; private set; }
 
-
-		/// <summary>
-		/// Crafting name, ignored if useItemResultNameAndDescription = true
-		/// </summary>
-		public string customName;
+        /// <summary>
+        /// Crafting name, ignored if useItemResultNameAndDescription = true
+        /// </summary>
+        public string customName;
 
         /// <summary>
         /// Crafting description, ignored if useItemResultNameAndDescription = true
         /// </summary>
         public string customDescription;
 
-        
-//        public bool overrideCategoryAudioClips = false;
-//        public General.AudioClipInfo successAudioClip = new General.AudioClipInfo();
-//        public General.AudioClipInfo craftingAudioClip = new General.AudioClipInfo() { loop = true };
-//        public General.AudioClipInfo canceledAudioClip = new General.AudioClipInfo();
-//        public General.AudioClipInfo failedAudioClip = new General.AudioClipInfo();
+        //        public bool overrideCategoryAudioClips = false;
+        //        public General.AudioClipInfo successAudioClip = new General.AudioClipInfo();
+        //        public General.AudioClipInfo craftingAudioClip = new General.AudioClipInfo() { loop = true };
+        //        public General.AudioClipInfo canceledAudioClip = new General.AudioClipInfo();
+        //        public General.AudioClipInfo failedAudioClip = new General.AudioClipInfo();
 
         /// <summary>
         /// The items required for this blueprint.
@@ -101,7 +88,7 @@ namespace Devdog.InventoryPro
         /// Can we craft this item already? disable if you want to unlock it through code.
         /// </summary>
         public bool playerLearnedBlueprint = true;
-    
+
         /// <summary>
         /// The price to craft this item once.
         /// </summary>
@@ -118,10 +105,10 @@ namespace Devdog.InventoryPro
         /// </summary>
         public ItemAmountRow[] resultItems = new ItemAmountRow[0];
 
-//        /// <summary>
-//        /// Amount of items you get when craft succeeded.
-//        /// </summary>
-//        public int itemResultCount = 1;
+        //        /// <summary>
+        //        /// Amount of items you get when craft succeeded.
+        //        /// </summary>
+        //        public int itemResultCount = 1;
 
         /// <summary>
         /// How many seconds does it take to craft the item?
@@ -146,14 +133,13 @@ namespace Devdog.InventoryPro
         /// </summary>
         public CraftingBlueprintLayout[] blueprintLayouts = new CraftingBlueprintLayout[0];
 
-//        public virtual bool IsLayoutValid(InventoryItemBase[] items)
-//        {
-//            Debug.LogWarning("Not written yet!");
-//            return true;
-//        }
+        //        public virtual bool IsLayoutValid(InventoryItemBase[] items)
+        //        {
+        //            Debug.LogWarning("Not written yet!");
+        //            return true;
+        //        }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return name;
         }
     }

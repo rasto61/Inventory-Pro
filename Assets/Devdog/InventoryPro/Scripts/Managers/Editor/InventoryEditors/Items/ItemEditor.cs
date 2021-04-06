@@ -318,22 +318,24 @@ namespace Devdog.InventoryPro.Editors {
 		}
 
 		public static string GetAssetName(InventoryItemBase item) {
-			return "Item_" + $"{(string.IsNullOrEmpty(item.AssetGroup) ? string.Empty:item.AssetGroup)}_" + (string.IsNullOrEmpty(item.name) ? string.Empty : item.name.ToLower().Replace(" ", "_")) + "_#" + item.ID + "_" + ItemManager.database.name + "_PFB.prefab";
+			uint categoryID = item.category != null ? item.category.ID : 0;
+			return $"Item_{categoryID}_" + (string.IsNullOrEmpty(item.name) ? string.Empty : item.name.ToLower().Replace(" ", "_")) + "_#" + item.ID + "_" + ItemManager.database.name + "_PFB.prefab";
 		}
 
 		private InventoryItemBase UpdatePrefab(InventoryItemBase instance, InventoryItemBase oldPrefab) {
-			Debug.Log("Update " + oldPrefab.name + "  " + oldPrefab.ID + "  to " + instance.name + " " + instance.ID);
+			// Debug.Log("Update " + oldPrefab.name + "  " + oldPrefab.ID + "  to " + instance.name + " " + instance.ID);
 
 			var assetPath = AssetDatabase.GetAssetPath(oldPrefab);
 			var newName = GetAssetName(instance);
 			PrefabUtility.ApplyPrefabInstance(instance.gameObject, InteractionMode.AutomatedAction);
 			//AssetDatabase.SaveAssets();
 
-			if (assetPath.EndsWith(newName) == false) {
-				// Debug.Log("Do rename prefab: {assetPath} to: {newName}");
-				var s = AssetDatabase.RenameAsset(assetPath, newName);
-				Debug.Log($"Do rename prefab: {assetPath} to: {newName}    {s}");
-			}
+			// if (assetPath.EndsWith(newName) == false) {
+			// 	// Debug.Log("Do rename prefab: {assetPath} to: {newName}");
+			// 	var s = AssetDatabase.RenameAsset(assetPath, newName);
+			// 	Debug.Log($"Do rename prefab: {assetPath} to: {newName}    {s}");
+			// }
+			UpdateAssetName(instance);
 
 			return PrefabUtility.GetCorrespondingObjectFromSource(instance);
 		}
@@ -380,24 +382,6 @@ namespace Devdog.InventoryPro.Editors {
 		protected override void SyncIDs() {
 			Debug.Log("Item ID's out of sync, force updating...");
 
-			//RepairPrefabLinks();
-
-			// List<InventoryItemBase> crudListResult = new List<InventoryItemBase>();
-			// var crudListCopy = crudList;
-			// uint lastID = 0;
-			// for (int i = 0; i < crudListCopy.Count; ++i) {
-			// 	var item = crudListCopy[i];
-			// 	if (item != null) {
-			// 		var editor = GetEditor(item, (int)lastID);
-			// 		InventoryItemBase inventoryItemBase = editor.target as InventoryItemBase;
-			// 		inventoryItemBase.ID = lastID++;
-			// 		crudListResult.Add(UpdatePrefab(inventoryItemBase, item));
-			// 	}
-			// }
-
-			// crudList = crudListResult;
-			// selectedItem = null;
-
 			crudList = crudList.Where(o => o != null).Distinct().ToList();
 
 			List<GameObject> brokenPrefabs = new List<GameObject>();
@@ -420,6 +404,7 @@ namespace Devdog.InventoryPro.Editors {
 				id++;
 			}
 
+			selectedItem = null;
 			AssetDatabase.SaveAssets();
 			EditorUtility.SetDirty(ItemManager.database);
 		}
@@ -441,6 +426,8 @@ namespace Devdog.InventoryPro.Editors {
 			if (assetPath.EndsWith(newName) == false) {
 				Debug.Log("Rename " + assetPath + " to " + newName);
 				AssetDatabase.RenameAsset(assetPath, newName);
+
+				AssetDatabase.SaveAssets();
 			}
 		}
 
