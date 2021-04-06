@@ -36,7 +36,7 @@ namespace Devdog.InventoryPro.Editors {
 		private static InventoryItemBase _previousItem;
 		private static InventoryItemBase _isDraggingPrefab;
 		private string _previouslySelectedGUIItemName;
-
+		private bool updatingPrefabs;
 		protected TypeFilter[] allItemTypes;
 
 		private UnityEngine.SceneManagement.Scene previewScene;
@@ -368,6 +368,10 @@ namespace Devdog.InventoryPro.Editors {
 		}
 
 		protected override bool IDsOutOfSync() {
+			if (updatingPrefabs) {
+				return true;
+			}
+
 			uint next = 0;
 			foreach (var item in crudList) {
 				if (item == null || item.ID != next)
@@ -380,6 +384,10 @@ namespace Devdog.InventoryPro.Editors {
 		}
 
 		protected override void SyncIDs() {
+			if (updatingPrefabs) {
+				return;
+			}
+			updatingPrefabs = true;
 			Debug.Log("Item ID's out of sync, force updating...");
 
 			crudList = crudList.Where(o => o != null).Distinct().ToList();
@@ -407,6 +415,7 @@ namespace Devdog.InventoryPro.Editors {
 			selectedItem = null;
 			AssetDatabase.SaveAssets();
 			EditorUtility.SetDirty(ItemManager.database);
+			updatingPrefabs = false;
 		}
 
 		private void UpdatePrefab(InventoryItemBase item, uint id) {
