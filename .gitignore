@@ -22,7 +22,6 @@
 sysinfo.txt
 
 # Custom stuff
-*.unitypackage
 bfg.jar
 
 \.vs/
